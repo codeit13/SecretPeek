@@ -27,7 +27,7 @@ request.onload = function () {
 
       const cardBut = document.createElement('div')
       cardBut.setAttribute('class', 'card-buttons')
-      
+
       const span = document.createElement('i')
       span.setAttribute('class','fa fa-eye icon')
       span.textContent=(' 111')
@@ -48,7 +48,7 @@ request.onload = function () {
       card.appendChild(p)
       card.appendChild(t)
       card.appendChild(cardBut)
-      
+
     })
   } else {
     const errorMessage = document.createElement('marquee')
@@ -65,6 +65,6 @@ function setLikeDislike(obj){
   t2[1].classList.toggle("liked");
 }
 
-function setIconLikeDislike(obj){ 
+function setIconLikeDislike(obj){
   obj.classList.toggle("liked");
 }
