@@ -1,10 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory, render_template
 from flask_sqlalchemy import SQLAlchemy
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder = basedir + '/public/')
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///" + \
     os.path.join(basedir, 'DB.db')
 app.config['SQLALCHEMY_ DATABASE_URI'] = False
@@ -22,6 +22,13 @@ class Confessions(db.Model):
     name = db.Column(db.String(32), index=True)
     message = db.Column(db.String(256))
 
+@app.route('/')
+def root():
+    return render_template('index.html')
+
+@app.route('/<path:path>')
+def send_file(path):
+    return send_from_directory(basedir+'/public/', path)
 
 @app.route('/api/get', methods=['GET'])
 def get_confession():
@@ -47,4 +54,4 @@ def post_confession():
 
 if __name__ == '__main__':
     db.create_all()
-    app.run()
+    app.run(debug=True)
